@@ -19,4 +19,21 @@ const addTodo = (req,res) => {
     })
 }
 
-export {addTodo}
+// Function to get all todos
+const getTodos = async (req, res) => {
+    try {
+        const todos = await todosModel.find();
+        res.status(200).json({
+            status: true,
+            data: todos,
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            message: "Failed to fetch todos",
+            error: error.message,
+        });
+    }
+};
+
+export { addTodo, getTodos };
